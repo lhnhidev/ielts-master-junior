@@ -1,6 +1,6 @@
 import express from 'express'
 import { authMiddleware } from './auth.js'
-import { getNow, SIMULATED_NOW_ISO } from './clock.js'
+import { getNow, toIsoVN } from './clock.js'
 import { getAssignmentsForStudent } from './service.js'
 
 export function createApp({ now = getNow }: { now?: () => Date } = {}) {
@@ -14,7 +14,7 @@ export function createApp({ now = getNow }: { now?: () => Date } = {}) {
     const current = now()
     res.json({
       studentId,
-      now: current.getTime() === getNow().getTime() ? SIMULATED_NOW_ISO : current.toISOString(),
+      now: toIsoVN(current),
       assignments: getAssignmentsForStudent(studentId, current),
     })
   })
