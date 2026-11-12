@@ -6,7 +6,7 @@ export interface Student {
 
 declare module 'express-serve-static-core' {
   interface Request {
-    student?: Student
+    student: Student
   }
 }
 

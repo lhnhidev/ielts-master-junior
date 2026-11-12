@@ -10,7 +10,7 @@ export function createApp({ now = getNow }: { now?: () => Date } = {}) {
 
   // Identity comes only from req.student (set by auth middleware); params/query/body/headers are ignored.
   app.get('/api/assignments', (req, res) => {
-    const studentId = req.student!.id
+    const studentId = req.student.id
     const current = now()
     res.json({
       studentId,
