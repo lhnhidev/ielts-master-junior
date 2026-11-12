@@ -17,7 +17,9 @@ describe('GET /api/assignments', () => {
       ['A03', 'submitted', false],
       ['A04', 'submitted', true],
     ])
-    expect(Object.keys(res.body.assignments[0]).sort()).toEqual(['dueAt', 'id', 'late', 'status', 'submittedAt', 'title'])
+    expect(Object.keys(res.body.assignments[0]).sort()).toEqual([
+      'daysLate', 'daysLeft', 'daysOverdue', 'dueAt', 'id', 'late', 'status', 'submittedAt', 'title',
+    ])
   })
 
   it('ignores studentId in query, body and headers', async () => {
