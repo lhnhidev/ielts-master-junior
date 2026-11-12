@@ -7,6 +7,10 @@ export interface Assignment {
   submittedAt: string | null
   status: AssignmentStatus
   late: boolean
+  /** Full 24h periods, computed on the server; 0 = under one day. */
+  daysLeft: number | null
+  daysOverdue: number | null
+  daysLate: number | null
 }
 
 export interface AssignmentsResponse {

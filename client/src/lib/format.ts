@@ -1,7 +1,6 @@
 import type { Assignment } from './api'
 
 const TZ = 'Asia/Ho_Chi_Minh'
-const DAY_MS = 24 * 60 * 60 * 1000
 
 const formatter = new Intl.DateTimeFormat('en-GB', {
   timeZone: TZ,
@@ -20,13 +19,8 @@ export function formatDateTime(iso: string): string {
   return `${p.day}/${p.month}/${p.year} ${p.hour}:${p.minute}`
 }
 
-function wholeDays(ms: number): number {
-  return Math.floor(ms / DAY_MS)
-}
-
-function daysText(prefix: string, ms: number, underOne: string): string {
-  const n = wholeDays(ms)
-  return n < 1 ? `${prefix} ${underOne}` : `${prefix} ${n} ngày`
+function daysText(prefix: string, days: number | null): string {
+  return days === null ? '' : days < 1 ? `${prefix} dưới 1 ngày` : `${prefix} ${days} ngày`
 }
 
 export type BadgeKind = 'done' | 'todo' | 'overdue' | 'late'
@@ -36,17 +30,13 @@ export interface AssignmentDescription {
   info: string
 }
 
-export function describeAssignment(a: Assignment, now: string): AssignmentDescription {
-  const nowMs = new Date(now).getTime()
-  const dueMs = new Date(a.dueAt).getTime()
-
-  if (a.status === 'submitted' && a.submittedAt) {
+export function describeAssignment(a: Assignment): AssignmentDescription {
+  if (a.status === 'submitted') {
     if (!a.late) return { badges: ['done'], info: '' }
-    const info = daysText('Trễ', new Date(a.submittedAt).getTime() - dueMs, 'dưới 1 ngày')
-    return { badges: ['done', 'late'], info }
+    return { badges: ['done', 'late'], info: daysText('Trễ', a.daysLate) }
   }
   if (a.status === 'overdue') {
-    return { badges: ['overdue'], info: daysText('Quá hạn', nowMs - dueMs, 'dưới 1 ngày') }
+    return { badges: ['overdue'], info: daysText('Quá hạn', a.daysOverdue) }
   }
-  return { badges: ['todo'], info: daysText('Còn', dueMs - nowMs, 'dưới 1 ngày') }
+  return { badges: ['todo'], info: daysText('Còn', a.daysLeft) }
 }

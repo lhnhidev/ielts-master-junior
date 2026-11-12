@@ -83,7 +83,7 @@ function App() {
                 (state.data.assignments.length === 0 ? (
                   <EmptyState />
                 ) : (
-                  <AssignmentList assignments={state.data.assignments} now={state.data.now} />
+                  <AssignmentList assignments={state.data.assignments} />
                 ))}
             </motion.div>
           </AnimatePresence>
