@@ -1,0 +1,24 @@
+/* Tailwind v4 theme for IELTS Master. Source of truth: design/tokens.json.
+   Copy this @theme block into client/src/index.css (after @import "tailwindcss"). */
+@theme {
+  --color-page: #F7F8FA;
+  --color-surface: #FFFFFF;
+  --color-border: #E5E7EB;
+  --color-ink: #1F2937;
+  --color-ink-muted: #6B7280;
+  --color-accent: #2457A6;
+  --color-accent-hover: #1E4A8D;
+  --color-on-accent: #FFFFFF;
+  --color-skeleton: #E8EBEF;
+  --color-status-done-bg: #E7F6EC;
+  --color-status-done-ink: #166534;
+  --color-status-todo-bg: #EEF2F6;
+  --color-status-todo-ink: #475569;
+  --color-status-overdue-bg: #FDECEC;
+  --color-status-overdue-ink: #B42318;
+  --color-status-late-bg: #FFF1E0;
+  --color-status-late-ink: #B45309;
+  --radius-md: 10px;
+  --shadow-card: 0 1px 2px rgba(16, 24, 40, 0.04);
+  --font-sans: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}

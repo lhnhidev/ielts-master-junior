@@ -1,0 +1,44 @@
+/* IELTS Master — generated from tokens.json */
+:root {
+  --page: #F7F8FA;
+  --surface: #FFFFFF;
+  --border: #E5E7EB;
+  --ink: #1F2937;
+  --ink-muted: #6B7280;
+  --accent: #2457A6;
+  --accent-hover: #1E4A8D;
+  --on-accent: #FFFFFF;
+  --skeleton: #E8EBEF;
+  --status-done-bg: #E7F6EC;
+  --status-done-ink: #166534;
+  --status-todo-bg: #EEF2F6;
+  --status-todo-ink: #475569;
+  --status-overdue-bg: #FDECEC;
+  --status-overdue-ink: #B42318;
+  --status-late-bg: #FFF1E0;
+  --status-late-ink: #B45309;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --radius-md: 10px;
+  --shadow-card: 0 1px 2px rgba(16, 24, 40, 0.04);
+  --appbar-height: 56px;
+  --container-max: 960px;
+  --row-height: 64px;
+  --control-height: 44px;
+  --icon-badge: 14px;
+  --icon-alert: 20px;
+  --font-sans: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+.page-title { font-family: var(--font-sans); font-size: 24px; line-height: 32px; font-weight: 600; }
+.item-title { font-family: var(--font-sans); font-size: 15px; line-height: 22px; font-weight: 500; }
+.meta { font-family: var(--font-sans); font-size: 13px; line-height: 20px; font-weight: 400; }
+.label { font-family: var(--font-sans); font-size: 13px; line-height: 16px; font-weight: 500; }
+.wordmark { font-family: var(--font-sans); font-size: 15px; line-height: 22px; font-weight: 600; }
