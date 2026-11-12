@@ -14,7 +14,7 @@ A small app that lists the assignments of the simulated student **S01**, each wi
 ## 2. Structure
 ```
 server/src   data.ts · auth.ts · clock.ts · status.ts (pure logic) · service.ts (filter + attach status) · app.ts · index.ts
-server/tests status, clock, API (supertest)
+server/tests status, clock, service, API (supertest)
 client/src   App.tsx · components/ (AssignmentList, StatusBadge, ...) · lib/ (api, format)
 e2e/         1 Playwright test (produces docs/screenshot.png)
 design/      final UI design (tokens, components, static previews)
@@ -25,11 +25,15 @@ design/      final UI design (tokens, components, static previews)
 ```json
 { "studentId": "S01", "now": "2026-11-11T09:00:00+07:00",
   "assignments": [{ "id": "A04", "title": "Foundation U4 – Speaking", "dueAt": "2026-11-08T23:59:00+07:00",
-                    "submittedAt": "2026-11-10T12:00:00+07:00", "status": "submitted", "late": true }] }
+                    "submittedAt": "2026-11-10T12:00:00+07:00", "status": "submitted", "late": true,
+                    "daysLeft": null, "daysOverdue": null, "daysLate": 1 }] }
 ```
-`status` is `submitted` | `not_submitted` | `overdue`; `late` is `true` only when submitted after the deadline.
+- `status` is `submitted` | `not_submitted` | `overdue`; `late` is `true` only when submitted after the deadline.
+- `daysLeft` (only when not submitted), `daysOverdue` (only when overdue), `daysLate` (only when submitted late): full 24h periods, `0` means under one day; the others are `null`.
 
 ## 4. How to run
+Requires Node.js >= 20.19 (needed by Vite).
+
 ```
 npm run install:all
 npm run dev
@@ -46,7 +50,7 @@ npm run typecheck
 npm run build
 npm run e2e         # first time: npx playwright install chromium
 ```
-Last results: server 13 tests pass, client 6 tests pass, typecheck and build OK, E2E 1/1 pass (creates `docs/screenshot.png`).
+Last results: server 23 tests pass, client 6 tests pass, typecheck and build OK, E2E 1/1 pass (the single test covers the error, empty and loaded states; creates `docs/screenshot.png`).
 
 ## 6. Status rules
 | Case | Result |
@@ -62,16 +66,25 @@ Result for S01: A01 Not submitted, A02 Overdue, A03 Submitted, A04 Submitted + L
 - Identity is simulated on the server: middleware calls `getCurrentStudent()` (`server/src/auth.ts`) and sets `req.student`.
 - `GET /api/assignments` only uses `req.student` and ignores any studentId in the URL, query, body or headers.
 - Filtering by student happens in `service.ts`; the client only renders.
-- The response contains only `{id, title, dueAt, submittedAt, status, late}`: no `studentId`, no other student's records.
+- The response contains only `{id, title, dueAt, submittedAt, status, late, daysLeft, daysOverdue, daysLate}`: no `studentId`, no other student's records.
 - Status is computed on the server (`status.ts`, pure function).
 - Tests prove it: `?studentId=S02`, body and header attempts return exactly the same result as a plain call, and the JSON never contains "B01"/"S02".
 
-## 8. Not done
+## 8. Assumptions and decisions
+- Status and day counts are computed on the server; the client only formats and displays them.
+- Day counts are full 24h periods (floored). E.g. A04 late by 1.5 days -> "Trễ 1 ngày"; A01 with 2.6 days left -> "Còn 2 ngày"; 0 is shown as "dưới 1 ngày" (under one day).
+- Boundaries: `now == dueAt` -> Not submitted; `submittedAt == dueAt` -> not late.
+- Fixed time through an injectable `getNow()`.
+- Identity comes from middleware (`req.student`), never from the request.
+- Table at 768px and above, cards below.
+- The `design/` folder holds the UI spec (tokens, component guide) used to build the UI.
+
+## 9. Not done
 - No real authentication (S01 identity is simulated), no authorization.
 - No database (data is in code), no deployment, no CI.
 - No pagination, search or filters; no submit-assignment feature.
 - Fixed time, real clock not used; E2E runs on Chromium only.
 - No automatic lint/format (to keep dependencies minimal); types are checked with `npm run typecheck`.
 
-## 9. AI usage
+## 10. AI usage
 Built with Claude Code (planner, builder, tester and reviewer agents); the logic and tests were reviewed afterwards.
