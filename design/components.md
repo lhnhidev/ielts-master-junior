@@ -18,7 +18,7 @@ Màn hình 390px, đã tải dữ liệu: mỗi bài là một thẻ, không cu�
 Thứ tự trong thẻ: ID bài (`meta`, `ink-muted`) rồi tên bài (`item-title`), "Hạn nộp" cùng ngày (`meta`), "Thời điểm nộp" cùng ngày hoặc "—", badge trạng thái ở dòng riêng, thông tin phụ (nếu có) ngay dưới. Thẻ cách nhau `space-3` 12px, padding `space-4` 16px, lề trang 16px. Mọi vùng chạm tối thiểu 44px.
 
 - Đừng nén badge cạnh tên bài; badge luôn ở dòng riêng để dễ thấy.
-- Dưới 640px dùng thẻ, từ 640px trở lên dùng bảng; cùng một nguồn dữ liệu.
+- Dưới 768px dùng thẻ, từ 768px trở lên dùng bảng; cùng một nguồn dữ liệu.
 
 ## Màn hình: đang tải
 
@@ -72,7 +72,7 @@ Table: bảng bài tập trên desktop, gọn và thoáng, hàng cao 64px.
 Người dùng cung cấp các hàng. Cột: ID bài 80px, Tên bài (co giãn), Hạn nộp 160px, Thời điểm nộp 160px, Trạng thái 208px (dưới ~860px màn hình: 56 / co giãn / 104 / 104 / 196px, ngày và tên bài được xuống dòng). Tiêu đề cột `label` màu `ink-muted`, cao 44px; lề trong 24px; đường ngăn 1px `border`; rê chuột nền `page`. Ô Trạng thái gồm badge và thông tin phụ (nếu có) ngay dưới; không có thì badge canh giữa hàng.
 
 - Tên bài `item-title` là chữ nổi nhất; ID bài `meta` màu `ink-muted`; hạn nộp và thời điểm nộp `meta` màu `ink`, số đều ("—" màu `ink-muted` khi chưa nộp).
-- Chỉ dùng từ 640px trở lên; dưới đó chuyển sang thẻ (`Card`).
+- Chỉ dùng từ 768px trở lên; dưới đó chuyển sang thẻ (`Card`).
 
 ## Skeleton
 

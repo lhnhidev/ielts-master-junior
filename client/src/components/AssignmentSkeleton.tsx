@@ -12,7 +12,7 @@ export function AssignmentSkeleton() {
         Đang tải bài tập
       </span>
 
-      <Card className="hidden overflow-hidden p-0 sm:block" aria-hidden="true">
+      <Card className="hidden overflow-hidden p-0 md:block" aria-hidden="true">
         <Table>
           <AssignmentTableHeader />
           <TableBody>
@@ -40,7 +40,7 @@ export function AssignmentSkeleton() {
         </Table>
       </Card>
 
-      <div className="flex flex-col gap-3 sm:hidden" aria-hidden="true">
+      <div className="flex flex-col gap-3 md:hidden" aria-hidden="true">
         {ROWS.map((i) => (
           <Card key={i} className="p-4">
             <Skeleton className="h-4 w-3/4" />

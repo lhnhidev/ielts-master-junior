@@ -36,15 +36,14 @@ export function AssignmentTableHeader() {
 
 interface AssignmentListProps {
   assignments: Assignment[]
-  now: string
 }
 
-export function AssignmentList({ assignments, now }: AssignmentListProps) {
-  const items = assignments.map((a) => ({ a, d: describeAssignment(a, now) }))
+export function AssignmentList({ assignments }: AssignmentListProps) {
+  const items = assignments.map((a) => ({ a, d: describeAssignment(a) }))
 
   return (
     <>
-      <Card className="hidden overflow-hidden p-0 sm:block">
+      <Card className="hidden overflow-hidden p-0 md:block">
         <Table>
           <AssignmentTableHeader />
           <TableBody>
@@ -70,7 +69,7 @@ export function AssignmentList({ assignments, now }: AssignmentListProps) {
         </Table>
       </Card>
 
-      <ul className="flex flex-col gap-3 sm:hidden">
+      <ul className="flex flex-col gap-3 md:hidden">
         {items.map(({ a, d }, i) => (
           <motion.li key={a.id} {...rowMotion(i)}>
             <Card className="p-4">
