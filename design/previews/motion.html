@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<title>Chuyển động · IELTS Master</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../components.css">
+<style>.demo { padding: 24px; } .demo-cap { margin-top: 8px; }
+.wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px; align-items: start; }
+.notes { display: grid; gap: 16px; }
+.notes li { padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+.notes li:last-child { border-bottom: 0; padding-bottom: 0; }
+.notes .item-title { display: block; margin-bottom: 4px; color: var(--ink); }
+.mrow { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 16px; border-bottom: 1px solid var(--border); }
+.mrow:last-child { border-bottom: 0; }
+.mrow .item-title { color: var(--ink); }
+.bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+@media (max-width: 639px) { .wrap { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="demo"><div class="wrap">
+  <ul class="notes" role="list">
+    <li><span class="item-title">Danh sách vào lần lượt</span><span class="im-sub meta">Stagger 40ms mỗi dòng, mỗi dòng 200ms, trượt lên 8px và hiện dần, ease-out.</span></li>
+    <li><span class="item-title">Badge "Nộp trễ"</span><span class="im-sub meta">Bật nhẹ scale 0.95 → 1 cùng hiện dần, 200ms ease-out, bắt đầu 120ms sau khi dòng của nó vào.</span></li>
+    <li><span class="item-title">Skeleton → nội dung</span><span class="im-sub meta">Fade 150ms. Hàng thật cao bằng hàng Skeleton (64px) nên bố cục không nhảy.</span></li>
+    <li><span class="item-title">prefers-reduced-motion</span><span class="im-sub meta">Tắt mọi animation và transition: nội dung hiện ngay, Skeleton đứng yên.</span></li>
+  </ul>
+  <div>
+    <div class="bar"><span class="label im-muted">Mô phỏng</span><button type="button" id="replay" class="im-btn label">Phát lại</button></div>
+    <ul id="demo" class="im-card im-card--flush" role="list"><li class="im-enter mrow" style="--i:0"><span class="item-title">Foundation U1 – Reading</span><span class="im-badges"><span class="im-badge im-badge--todo label"><svg class="im-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Chưa nộp</span></span></li><li class="im-enter mrow" style="--i:1"><span class="item-title">Foundation U2 – Listening</span><span class="im-badges"><span class="im-badge im-badge--overdue label"><svg class="im-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>Quá hạn</span></span></li><li class="im-enter mrow" style="--i:2"><span class="item-title">Foundation U3 – Writing</span><span class="im-badges"><span class="im-badge im-badge--done label"><svg class="im-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Đã nộp</span></span></li><li class="im-enter mrow" style="--i:3"><span class="item-title">Foundation U4 – Speaking</span><span class="im-badges"><span class="im-badge im-badge--done label"><svg class="im-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Đã nộp</span><span class="im-badge im-badge--late label"><svg class="im-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Nộp trễ</span></span></li></ul>
+  </div>
+</div></div>
+<script>
+const el = document.getElementById('demo');
+const tpl = el.innerHTML;
+document.getElementById('replay').addEventListener('click', () => {
+  el.innerHTML = '';
+  void el.offsetWidth;
+  el.innerHTML = tpl;
+});
+</script>
+</body>
+</html>
