@@ -22,8 +22,7 @@ test('shows S01 assignments with correct statuses and saves screenshot', async (
   // Only S01's single "Foundation U1 – Reading" (S02's B01 must be absent).
   await expect(page.locator('table').getByText('Foundation U1 – Reading')).toHaveCount(1)
 
-  // Let animations settle before the screenshot.
+  // Animations are disabled via reducedMotion (see playwright.config.ts), so the screenshot is stable.
   await expect(rows.nth(3).getByText('Nộp trễ')).toBeVisible()
-  await page.waitForTimeout(600)
   await page.screenshot({ path: 'docs/screenshot.png', fullPage: true })
 })
