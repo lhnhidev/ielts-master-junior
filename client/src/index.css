@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+/* Source of truth: design/tailwind-theme.css */
+@theme {
+  --color-page: #F7F8FA;
+  --color-surface: #FFFFFF;
+  --color-border: #E5E7EB;
+  --color-ink: #1F2937;
+  --color-ink-muted: #6B7280;
+  --color-accent: #2457A6;
+  --color-accent-hover: #1E4A8D;
+  --color-on-accent: #FFFFFF;
+  --color-skeleton: #E8EBEF;
+  --color-status-done-bg: #E7F6EC;
+  --color-status-done-ink: #166534;
+  --color-status-todo-bg: #EEF2F6;
+  --color-status-todo-ink: #475569;
+  --color-status-overdue-bg: #FDECEC;
+  --color-status-overdue-ink: #B42318;
+  --color-status-late-bg: #FFF1E0;
+  --color-status-late-ink: #B45309;
+  --radius-md: 10px;
+  --shadow-card: 0 1px 2px rgba(16, 24, 40, 0.04);
+  /* "Inter Variable" is the family name registered by @fontsource-variable/inter. */
+  --font-sans: "Inter Variable", Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Skeleton pulse: opacity 1 -> 0.55, 1.6s (design/components.md). */
+@theme {
+  --animate-skeleton: skeleton-pulse 1.6s ease-in-out infinite;
+  @keyframes skeleton-pulse {
+    50% {
+      opacity: 0.55;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-skeleton {
+    animation: none;
+  }
+}
+
+/* Typography: the only four text styles. */
+@utility text-page-title {
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 600;
+}
+@utility text-item-title {
+  font-size: 15px;
+  line-height: 22px;
+  font-weight: 500;
+}
+@utility text-wordmark {
+  font-size: 15px;
+  line-height: 22px;
+  font-weight: 600;
+}
+@utility text-meta {
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 400;
+}
+@utility text-label {
+  font-size: 13px;
+  line-height: 16px;
+  font-weight: 500;
+}
+
+@layer base {
+  body {
+    @apply bg-page text-ink font-sans antialiased;
+  }
+}
