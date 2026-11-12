@@ -1,6 +1,7 @@
 {
   "name": "ielts-master-junior",
   "private": true,
+  "engines": { "node": ">=20.19" },
   "scripts": {
     "install:all": "npm install && cd server && npm install && cd ../client && npm install",
     "dev": "node scripts/dev.mjs",

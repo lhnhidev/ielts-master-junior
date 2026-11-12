@@ -6,7 +6,7 @@ export default defineConfig({
   use: { baseURL: 'http://localhost:5173', reducedMotion: 'reduce' },
   projects: [{ name: 'chromium', use: { ...devices['Desktop Chrome'] } }],
   webServer: {
-    command: 'node scripts/dev.mjs',
+    command: 'npm run dev',
     url: 'http://localhost:5173',
     reuseExistingServer: !process.env.CI,
     timeout: 60_000,
