@@ -41,10 +41,9 @@ export function describeAssignment(a: Assignment, now: string): AssignmentDescri
   const dueMs = new Date(a.dueAt).getTime()
 
   if (a.status === 'submitted' && a.submittedAt) {
-    const base = `Nộp lúc ${formatDateTime(a.submittedAt)}`
-    if (!a.late) return { badges: ['done'], info: base }
-    const lateText = daysText('trễ', new Date(a.submittedAt).getTime() - dueMs, 'dưới 1 ngày')
-    return { badges: ['done', 'late'], info: `${base} · ${lateText}` }
+    if (!a.late) return { badges: ['done'], info: '' }
+    const info = daysText('Trễ', new Date(a.submittedAt).getTime() - dueMs, 'dưới 1 ngày')
+    return { badges: ['done', 'late'], info }
   }
   if (a.status === 'overdue') {
     return { badges: ['overdue'], info: daysText('Quá hạn', nowMs - dueMs, 'dưới 1 ngày') }

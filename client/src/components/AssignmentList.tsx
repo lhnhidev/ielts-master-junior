@@ -24,9 +24,11 @@ export function AssignmentTableHeader() {
   return (
     <TableHeader>
       <TableRow>
+        <TableHead className="w-14 min-[860px]:w-20">ID bài</TableHead>
         <TableHead>Tên bài</TableHead>
-        <TableHead className="w-44">Hạn nộp</TableHead>
-        <TableHead className="w-72">Trạng thái</TableHead>
+        <TableHead className="w-[104px] min-[860px]:w-40">Hạn nộp</TableHead>
+        <TableHead className="w-[104px] min-[860px]:w-40">Thời điểm nộp</TableHead>
+        <TableHead className="w-[196px] min-[860px]:w-52">Trạng thái</TableHead>
       </TableRow>
     </TableHeader>
   )
@@ -48,15 +50,19 @@ export function AssignmentList({ assignments, now }: AssignmentListProps) {
           <TableBody>
             {items.map(({ a, d }, i) => (
               <MotionRow key={a.id} className="h-16 hover:bg-page" {...rowMotion(i)}>
+                <TableCell className="text-meta tabular-nums text-ink-muted">{a.id}</TableCell>
                 <TableCell className="text-item-title text-ink">{a.title}</TableCell>
                 <TableCell className="text-meta tabular-nums text-ink">{formatDateTime(a.dueAt)}</TableCell>
+                <TableCell className="text-meta tabular-nums text-ink">
+                  {a.submittedAt ? formatDateTime(a.submittedAt) : <span className="text-ink-muted">—</span>}
+                </TableCell>
                 <TableCell>
                   <div className="flex items-center gap-2">
                     {d.badges.map((kind) => (
                       <StatusBadge key={kind} kind={kind} index={i} />
                     ))}
                   </div>
-                  <div className="mt-1 text-meta text-ink-muted">{d.info}</div>
+                  {d.info && <div className="mt-1 text-meta text-ink-muted">{d.info}</div>}
                 </TableCell>
               </MotionRow>
             ))}
@@ -68,16 +74,25 @@ export function AssignmentList({ assignments, now }: AssignmentListProps) {
         {items.map(({ a, d }, i) => (
           <motion.li key={a.id} {...rowMotion(i)}>
             <Card className="p-4">
-              <div className="text-item-title text-ink">{a.title}</div>
+              <div className="flex items-baseline gap-2">
+                <span className="text-meta tabular-nums text-ink-muted">{a.id}</span>
+                <span className="text-item-title text-ink">{a.title}</span>
+              </div>
               <div className="text-meta text-ink-muted">
                 Hạn nộp <span className="tabular-nums text-ink">{formatDateTime(a.dueAt)}</span>
+              </div>
+              <div className="text-meta text-ink-muted">
+                Thời điểm nộp{' '}
+                <span className="tabular-nums text-ink">
+                  {a.submittedAt ? formatDateTime(a.submittedAt) : <span className="text-ink-muted">—</span>}
+                </span>
               </div>
               <div className="mt-3 flex flex-wrap items-center gap-2">
                 {d.badges.map((kind) => (
                   <StatusBadge key={kind} kind={kind} index={i} />
                 ))}
               </div>
-              <div className="mt-1 text-meta text-ink-muted">{d.info}</div>
+              {d.info && <div className="mt-1 text-meta text-ink-muted">{d.info}</div>}
             </Card>
           </motion.li>
         ))}

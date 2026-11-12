@@ -47,11 +47,21 @@ function App() {
       </header>
 
       <main className="mx-auto w-full max-w-[960px] px-4 pb-8 pt-6 sm:px-8 sm:pb-16 sm:pt-10">
-        <h1 className="text-page-title text-ink">Bài tập của tôi</h1>
+        <h1 className="text-page-title text-ink">
+          {state.status === 'ready' ? (
+            `Bài tập của ${state.data.studentId}`
+          ) : state.status === 'loading' ? (
+            <span className="flex items-center gap-2">
+              Bài tập của <Skeleton className="h-8 w-12" />
+            </span>
+          ) : (
+            'Bài tập'
+          )}
+        </h1>
         <div className="mt-1 flex h-5 items-center text-meta text-ink-muted">
           {state.status === 'ready' ? (
             <p>
-              Học viên {state.data.studentId} · Thời điểm giả lập: {formatDateTime(state.data.now)}
+              Thời điểm giả lập: {formatDateTime(state.data.now)}
             </p>
           ) : state.status === 'loading' ? (
             <Skeleton className="h-3.5 w-72 max-w-full" />

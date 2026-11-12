@@ -37,14 +37,10 @@ describe('describeAssignment', () => {
     expect(describeAssignment(a02, NOW)).toEqual({ badges: ['overdue'], info: 'Quá hạn 1 ngày' })
   })
   it('A03 submitted on time', () => {
-    expect(describeAssignment(a03, NOW)).toEqual({
-      badges: ['done'], info: 'Nộp lúc 10/11/2026 20:00',
-    })
+    expect(describeAssignment(a03, NOW)).toEqual({ badges: ['done'], info: '' })
   })
   it('A04 submitted late', () => {
-    expect(describeAssignment(a04, NOW)).toEqual({
-      badges: ['done', 'late'], info: 'Nộp lúc 10/11/2026 12:00 · trễ 1 ngày',
-    })
+    expect(describeAssignment(a04, NOW)).toEqual({ badges: ['done', 'late'], info: 'Trễ 1 ngày' })
   })
   it('uses "dưới 1 ngày" under a day', () => {
     expect(describeAssignment({ ...a01, dueAt: '2026-11-11T20:00:00+07:00' }, NOW).info)
@@ -52,6 +48,6 @@ describe('describeAssignment', () => {
     expect(describeAssignment({ ...a02, dueAt: '2026-11-10T20:00:00+07:00' }, NOW).info)
       .toBe('Quá hạn dưới 1 ngày')
     expect(describeAssignment({ ...a04, dueAt: '2026-11-10T20:00:00+07:00' }, NOW).info)
-      .toBe('Nộp lúc 10/11/2026 12:00 · trễ dưới 1 ngày')
+      .toBe('Trễ dưới 1 ngày')
   })
 })
