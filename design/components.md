@@ -6,7 +6,7 @@ Mỗi mục nói người dùng (code) cung cấp gì, quy cách và điều kh�
 
 Màn hình chính ở 1280px, đã tải dữ liệu: thanh trên cùng, tiêu đề, dòng phụ và bảng 4 bài trong một Card.
 
-Người dùng cung cấp danh sách bài (tên, hạn nộp, trạng thái, thông tin phụ). Giữ nguyên thứ tự dữ liệu. Khung nội dung rộng tối đa `container-max` 960px, canh giữa; hàng cao `row-height` 64px; tên bài (`item-title`) là chữ nổi nhất. Danh sách vào theo stagger 40ms (xem `MotionNotes`).
+Người dùng cung cấp danh sách bài (ID, tên, hạn nộp, thời điểm nộp, trạng thái, thông tin phụ). Giữ nguyên thứ tự dữ liệu. Khung nội dung rộng tối đa `container-max` 960px, canh giữa; hàng cao `row-height` 64px; tên bài (`item-title`) là chữ nổi nhất. Danh sách vào theo stagger 40ms (xem `MotionNotes`).
 
 - Không thêm bộ lọc, tìm kiếm, sidebar hay phân trang.
 - Không đổi thứ tự hoặc gộp "Nộp trễ" vào "Đã nộp".
@@ -15,7 +15,7 @@ Người dùng cung cấp danh sách bài (tên, hạn nộp, trạng thái, th�
 
 Màn hình 390px, đã tải dữ liệu: mỗi bài là một thẻ, không cuộn ngang.
 
-Thứ tự trong thẻ: tên bài (`item-title`), "Hạn nộp" cùng ngày (`meta`), badge trạng thái ở dòng riêng, thông tin phụ ngay dưới. Thẻ cách nhau `space-3` 12px, padding `space-4` 16px, lề trang 16px. Mọi vùng chạm tối thiểu 44px.
+Thứ tự trong thẻ: ID bài (`meta`, `ink-muted`) rồi tên bài (`item-title`), "Hạn nộp" cùng ngày (`meta`), "Thời điểm nộp" cùng ngày hoặc "—", badge trạng thái ở dòng riêng, thông tin phụ (nếu có) ngay dưới. Thẻ cách nhau `space-3` 12px, padding `space-4` 16px, lề trang 16px. Mọi vùng chạm tối thiểu 44px.
 
 - Đừng nén badge cạnh tên bài; badge luôn ở dòng riêng để dễ thấy.
 - Dưới 640px dùng thẻ, từ 640px trở lên dùng bảng; cùng một nguồn dữ liệu.
@@ -24,7 +24,7 @@ Thứ tự trong thẻ: tên bài (`item-title`), "Hạn nộp" cùng ngày (`me
 
 Màn hình đang tải ở desktop: Skeleton có đúng hình dạng nội dung thật.
 
-Giữ tiêu đề trang và tiêu đề cột; dòng phụ và 4 hàng thành khối `skeleton`. Mỗi hàng Skeleton cao đúng `row-height` 64px (tên bài 16px, ngày 14px, badge 24px, thông tin phụ 14px) để lúc nội dung về, fade 150ms, bố cục không nhảy.
+Giữ tiêu đề cột; tiêu đề trang là "Bài tập của " kèm Skeleton 32px × 48px thay cho mã học viên; dòng phụ và 4 hàng thành khối `skeleton`. Mỗi hàng Skeleton cao đúng `row-height` 64px (ID 14px, tên bài 16px, hai ngày 14px, badge 24px, thông tin phụ 14px) để lúc nội dung về, fade 150ms, bố cục không nhảy.
 
 - Đặt `aria-busy="true"` trên vùng chứa và một dòng chữ ẩn "Đang tải bài tập" (`role="status"`).
 - Không dùng spinner. Với `prefers-reduced-motion`, bỏ hiệu ứng nhấp nháy.
@@ -60,7 +60,7 @@ Người dùng cung cấp biến thể (`done`, `todo`, `overdue`, `late`). Cao 
 
 Card: bề mặt trắng viền mảnh, dùng làm thẻ bài trên mobile, khung bọc bảng desktop và khung trạng thái rỗng.
 
-Người dùng cung cấp nội dung bên trong. Nền `surface`, viền 1px `border`, bo `radius-md`, bóng `shadow-card`. Thẻ bài padding `space-4` 16px; thứ tự: tên bài, "Hạn nộp" và ngày, badge ở dòng riêng, thông tin phụ.
+Người dùng cung cấp nội dung bên trong. Nền `surface`, viền 1px `border`, bo `radius-md`, bóng `shadow-card`. Thẻ bài padding `space-4` 16px; thứ tự: ID bài và tên bài, "Hạn nộp" và ngày, "Thời điểm nộp" và ngày (hoặc "—"), badge ở dòng riêng, thông tin phụ (nếu có).
 
 - Không thêm viền màu một bên, không đổ bóng đậm hơn.
 - Khi bọc bảng, bỏ padding và để Card cắt góc (`overflow-hidden`).
@@ -69,9 +69,9 @@ Người dùng cung cấp nội dung bên trong. Nền `surface`, viền 1px `bo
 
 Table: bảng bài tập trên desktop, gọn và thoáng, hàng cao 64px.
 
-Người dùng cung cấp các hàng. Cột: Tên bài (co giãn), Hạn nộp 176px, Trạng thái 288px. Tiêu đề cột `label` màu `ink-muted`, cao 44px; lề trong 24px; đường ngăn 1px `border`; rê chuột nền `page`. Ô Trạng thái gồm badge và thông tin phụ ngay dưới.
+Người dùng cung cấp các hàng. Cột: ID bài 80px, Tên bài (co giãn), Hạn nộp 160px, Thời điểm nộp 160px, Trạng thái 208px (dưới ~860px màn hình: 56 / co giãn / 104 / 104 / 196px, ngày và tên bài được xuống dòng). Tiêu đề cột `label` màu `ink-muted`, cao 44px; lề trong 24px; đường ngăn 1px `border`; rê chuột nền `page`. Ô Trạng thái gồm badge và thông tin phụ (nếu có) ngay dưới; không có thì badge canh giữa hàng.
 
-- Tên bài `item-title` là chữ nổi nhất; ngày hạn nộp `meta` màu `ink`, số đều.
+- Tên bài `item-title` là chữ nổi nhất; ID bài `meta` màu `ink-muted`; hạn nộp và thời điểm nộp `meta` màu `ink`, số đều ("—" màu `ink-muted` khi chưa nộp).
 - Chỉ dùng từ 640px trở lên; dưới đó chuyển sang thẻ (`Card`).
 
 ## Skeleton

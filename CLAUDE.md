@@ -1,7 +1,7 @@
 # IELTS Master – Junior Full-Stack: "Bài tập của tôi"
 
 ## Mục tiêu và ràng buộc
-- Ứng dụng nhỏ hiển thị "Bài tập của tôi" cho học viên giả lập S01. Làm trong 2–3 giờ, KHÔNG over-engineer.
+- Ứng dụng nhỏ hiển thị "Bài tập của S01" (mã học viên lấy từ API) cho học viên giả lập S01. Làm trong 2–3 giờ, KHÔNG over-engineer.
 - Stack: React + TypeScript + Tailwind CSS v4 (Vite) ở `client/`; Node.js + Express + TypeScript ở `server/`. Dữ liệu giả lập trong code. KHÔNG database, KHÔNG deploy, KHÔNG secrets hay dữ liệu thật.
 - Thư viện bổ sung (chỉ 2): shadcn/ui (component) và Motion (animation, import từ "motion/react", KHÔNG cài framer-motion). Không thêm thư viện UI/animation nào khác.
 - Test: Vitest (+ supertest cho API) và đúng 1 bài E2E bằng Playwright. Ít dependency nhất có thể.
@@ -44,7 +44,7 @@
   - Không emoji, gradient, minh họa, dark mode, logo (chỉ wordmark chữ "IELTS Master"). Không thêm bộ lọc, tìm kiếm, sidebar, phân trang.
   - Ba cỡ chữ (24 semibold, 15 medium, 13 regular), một bo góc 10px, viền 1px kèm bóng rất nhẹ. Màu nhấn #2457A6 chỉ cho nút, liên kết, focus ring. Dùng token Tailwind (`bg-page`, `text-ink-muted`, `rounded-md`...), không viết màu thô trong component.
   - Badge luôn có chữ + icon lucide (Check, Clock, TriangleAlert); "Nộp trễ" là badge riêng cạnh "Đã nộp". Cặp màu theo `design/README.md`, không đổi.
-  - Desktop (từ 640px): Table trong Card, hàng cao 64px, cột Hạn nộp 176px, Trạng thái 288px, thông tin phụ nằm ngay dưới badge. Mobile: mỗi bài một Card, badge ở dòng riêng, không cuộn ngang, vùng chạm ≥ 44px.
+  - Desktop (từ 640px): Table trong Card, hàng cao 64px, các cột ID bài 80px · Tên bài · Hạn nộp 160px · Thời điểm nộp 160px · Trạng thái 208px (bản gọn dưới ~860px), thông tin phụ (nếu có) nằm ngay dưới badge. Mobile: mỗi bài một Card, badge ở dòng riêng, không cuộn ngang, vùng chạm ≥ 44px.
   - Đang tải: Skeleton đúng hình dạng, hàng cao bằng hàng thật. Rỗng: đúng một dòng "Bạn chưa có bài tập nào". Lỗi: Alert + nút "Thử lại" (câu chữ ở `design/README.md`).
   - Motion: stagger 40ms/dòng, mỗi dòng 200ms, trượt 8px; badge "Nộp trễ" scale 0.95 → 1; Skeleton → nội dung fade 150ms. Code mẫu ở `design/README.md`.
 - Sau khi sửa UI, chạy `/ui-check`.

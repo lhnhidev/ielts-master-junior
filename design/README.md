@@ -25,20 +25,22 @@ Dùng đúng chữ dưới đây, không viết lại.
 
 | Vị trí | Chữ |
 | --- | --- |
-| Tiêu đề trang | Bài tập của tôi |
-| Dòng phụ | Học viên S01 · Thời điểm giả lập: 11/11/2026 09:00 |
-| Cột / trường mỗi bài | Tên bài · Hạn nộp · Trạng thái |
+| Tiêu đề trang | Bài tập của S01 (S01 lấy từ dữ liệu học viên của API, không viết cứng trong client; khi tải: "Bài tập của " + Skeleton; khi lỗi: "Bài tập") |
+| Dòng phụ | Thời điểm giả lập: 11/11/2026 09:00 |
+| Cột / trường mỗi bài | ID bài · Tên bài · Hạn nộp · Thời điểm nộp · Trạng thái |
 | Trạng thái rỗng | Bạn chưa có bài tập nào (chỉ một dòng, không thêm dòng phụ) |
 | Trạng thái lỗi | Tiêu đề "Chưa tải được bài tập của bạn", mô tả "Kết nối bị gián đoạn. Vui lòng thử lại sau ít phút.", nút "Thử lại" (đề chỉ yêu cầu thông điệp thân thiện và nút; câu chữ này do người thiết kế viết) |
 
 Giữ nguyên thứ tự 4 bài. "Nộp trễ" là badge riêng đặt cạnh badge "Đã nộp", không thay thế nó.
 
-| Tên bài | Hạn nộp | Trạng thái | Thông tin phụ |
-| --- | --- | --- | --- |
-| Foundation U1 – Reading | 13/11/2026 23:59 | Chưa nộp | Còn 2 ngày |
-| Foundation U2 – Listening | 09/11/2026 23:59 | Quá hạn | Quá hạn 1 ngày |
-| Foundation U3 – Writing | 10/11/2026 23:59 | Đã nộp | Nộp lúc 10/11/2026 20:00 |
-| Foundation U4 – Speaking | 08/11/2026 23:59 | Đã nộp + Nộp trễ | Nộp lúc 10/11/2026 12:00 · trễ 1 ngày |
+| ID bài | Tên bài | Hạn nộp | Thời điểm nộp | Trạng thái | Thông tin phụ |
+| --- | --- | --- | --- | --- | --- |
+| A01 | Foundation U1 – Reading | 13/11/2026 23:59 | — | Chưa nộp | Còn 2 ngày |
+| A02 | Foundation U2 – Listening | 09/11/2026 23:59 | — | Quá hạn | Quá hạn 1 ngày |
+| A03 | Foundation U3 – Writing | 10/11/2026 23:59 | 10/11/2026 20:00 | Đã nộp | (không có) |
+| A04 | Foundation U4 – Speaking | 08/11/2026 23:59 | 10/11/2026 12:00 | Đã nộp + Nộp trễ | Trễ 1 ngày |
+
+Thông tin phụ chỉ hiện khi có ý nghĩa: "Còn N ngày" (chưa nộp), "Quá hạn N ngày" (quá hạn), "Trễ N ngày" (nộp trễ; dưới 1 ngày thì "Trễ dưới 1 ngày"); nộp đúng hạn thì không có dòng phụ. Thời điểm nộp chưa có thì hiện "—" (màu `ink-muted`).
 
 ## Bảng ghi chú
 
@@ -59,7 +61,7 @@ Mọi cặp chữ/nền trong hệ thống đạt WCAG AA. Badge luôn có chữ
 | --- | --- | --- |
 | 24px / 32px, semibold | `page-title` | Tiêu đề trang |
 | 15px / 22px, medium | `item-title` | Tên bài (chữ nổi nhất), tiêu đề Alert, dòng trạng thái rỗng, wordmark (semibold) |
-| 13px / 20px, regular | `meta` | Chữ phụ màu `ink-muted`; ngày hạn nộp màu `ink`, số đều |
+| 13px / 20px, regular | `meta` | Chữ phụ màu `ink-muted`; ID bài màu `ink-muted`; ngày hạn nộp và thời điểm nộp màu `ink`, số đều |
 | 13px / 16px, medium | `label` | Chữ badge, tiêu đề cột, chữ nút (cùng cỡ 13px) |
 
 Phông Inter, dự phòng phông hệ thống (`font-sans`).
@@ -73,9 +75,9 @@ Phông Inter, dự phòng phông hệ thống (`font-sans`).
 | Thanh trên cùng | Cao `appbar-height` 56px, nền `surface`, viền dưới 1px `border`, chỉ có wordmark |
 | Khung nội dung | Rộng tối đa `container-max` 960px, canh giữa; lề ngang 32px (mobile 16px) |
 | Nhịp dọc | Thanh trên → tiêu đề 40px; tiêu đề → dòng phụ 4px; dòng phụ → bảng 24px; cuối trang 64px (mobile: 24 / 4 / 20 / 32) |
-| Bảng desktop | Trong một Card. Hàng tiêu đề cao 44px. Mỗi hàng bài cao `row-height` 64px. Cột: Tên bài (co giãn) · Hạn nộp 176px · Trạng thái 288px. Lề trong hàng 24px, đệm giữa cột 12px, đường ngăn 1px `border`, hàng cuối không viền, rê chuột nền `page` |
-| Ô Trạng thái | Badge ở trên, thông tin phụ 13px `ink-muted` ngay dưới (cách 4px). Hai badge cạnh nhau cách 8px |
-| Thẻ mobile (390px) | Mỗi bài một Card, padding 16px, cách nhau 12px, không cuộn ngang. Thứ tự từ trên xuống: tên bài, "Hạn nộp" + ngày, badge ở dòng riêng (cách 12px), thông tin phụ |
+| Bảng desktop | Trong một Card. Hàng tiêu đề cao 44px. Mỗi hàng bài cao `row-height` 64px. Cột: ID bài 80px · Tên bài (co giãn) · Hạn nộp 160px · Thời điểm nộp 160px · Trạng thái 208px (khung 960px cho tên bài ~288px). Dưới ~860px rộng màn hình dùng bản gọn 56 / co giãn / 104 / 104 / 196px: ngày xuống hai dòng, tên bài được xuống dòng. Lề trong hàng 24px, đệm giữa cột 12px, đường ngăn 1px `border`, hàng cuối không viền, rê chuột nền `page` |
+| Ô Trạng thái | Badge ở trên, thông tin phụ (nếu có) 13px `ink-muted` ngay dưới (cách 4px); không có thông tin phụ thì badge canh giữa hàng 64px. Hai badge cạnh nhau cách 8px |
+| Thẻ mobile (390px) | Mỗi bài một Card, padding 16px, cách nhau 12px, không cuộn ngang. Thứ tự từ trên xuống: ID bài (`meta`, `ink-muted`) cạnh tên bài, "Hạn nộp" + ngày, "Thời điểm nộp" + ngày hoặc "—", badge ở dòng riêng (cách 12px), thông tin phụ nếu có |
 | Vùng chạm | Tối thiểu `control-height` 44px (nút Thử lại; trên mobile nút rộng hết khung) |
 | Focus | Vòng 2px `accent`, cách 2px, cho mọi phần tử tương tác (`:focus-visible`); 7.0:1 trên `surface` |
 
@@ -83,7 +85,7 @@ Phông Inter, dự phòng phông hệ thống (`font-sans`).
 
 | Trạng thái | Cách làm |
 | --- | --- |
-| Đang tải | Giữ tiêu đề trang và tiêu đề cột. Dòng phụ và 4 hàng thành Skeleton cùng kích thước thật (tên bài, ngày, badge, thông tin phụ), mỗi hàng đúng 64px nên khi nội dung về bố cục không nhảy. Vùng chứa `aria-busy="true"` kèm chữ ẩn "Đang tải bài tập" |
+| Đang tải | Giữ tiêu đề cột; tiêu đề trang là "Bài tập của " kèm một khối Skeleton cao 32px, rộng 48px thay cho S01. Dòng phụ và 4 hàng thành Skeleton cùng kích thước thật (ID, tên bài, hai ngày, badge, thông tin phụ), mỗi hàng đúng 64px nên khi nội dung về bố cục không nhảy. Vùng chứa `aria-busy="true"` kèm chữ ẩn "Đang tải bài tập" |
 | Rỗng | Một Card ở chỗ bảng: ô biểu tượng 48px (`page`, viền `border`, icon `ink-muted`) và dòng "Bạn chưa có bài tập nào" (`item-title`) |
 | Lỗi | Một Alert thay cho bảng: ô icon cảnh báo (`status-overdue-bg` / `status-overdue-ink`), tiêu đề, mô tả, nút "Thử lại" (nền `accent`, chữ `on-accent`). Desktop: nút nằm bên phải; mobile: xếp dọc, nút rộng hết khung. `role="alert"` |
 

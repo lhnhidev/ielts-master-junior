@@ -24,6 +24,7 @@ ul { list-style: none; }
 .im-head { margin-bottom: var(--space-6); }
 .im-head .page-title { color: var(--ink); }
 .im-head .im-sub { margin-top: var(--space-1); }
+.im-title-skel { display: flex; align-items: center; gap: var(--space-2); }
 
 /* card */
 .im-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); box-shadow: var(--shadow-card); }
@@ -49,8 +50,15 @@ ul { list-style: none; }
 .im-table tbody tr { height: var(--row-height); border-bottom: 1px solid var(--border); }
 .im-table tbody tr:last-child { border-bottom: 0; }
 .im-table tbody tr:hover { background: var(--page); }
-.im-table .col-due { width: 176px; }
-.im-table .col-status { width: 288px; }
+.im-table .col-id { width: 80px; }
+.im-table .col-due, .im-table .col-sub { width: 160px; }
+.im-table .col-status { width: 208px; }
+.im-table td { font-variant-numeric: tabular-nums; }
+@media (max-width: 859px) {
+  .im-table .col-id { width: 56px; }
+  .im-table .col-due, .im-table .col-sub { width: 104px; }
+  .im-table .col-status { width: 196px; }
+}
 .im-table .item-title { color: var(--ink); }
 
 /* mobile list */
@@ -58,6 +66,7 @@ ul { list-style: none; }
 .im-item { padding: var(--space-4); }
 .im-item .item-title { color: var(--ink); }
 .im-due { margin-top: 2px; }
+.im-item-head { display: flex; align-items: baseline; gap: var(--space-2); }
 .im-item .im-status { margin-top: var(--space-3); }
 
 /* skeleton */
